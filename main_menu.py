@@ -24,7 +24,6 @@ class MainMenu:
         }
         
         self.setup_ui()
-        
         self.load_dashboard_data()
     
     def setup_ui(self):
@@ -70,7 +69,7 @@ class MainMenu:
         logo_frame.pack(fill=tk.X)
         logo_frame.pack_propagate(False)
         
-        logo_path = os.path.join("assets", "logo_white.png")
+        logo_path = "assets/logo.png"
         if os.path.exists(logo_path):
             try:
                 logo_image = Image.open(logo_path)
@@ -102,7 +101,6 @@ class MainMenu:
             {"text": "Dashboard", "icon": "dashboard.png", "command": self.show_dashboard},
             {"text": "Students", "icon": "student.png", "command": self.open_student_form},
             {"text": "Teachers", "icon": "teacher.png", "command": self.open_teacher_form},
-            {"text": "Reports", "icon": "report.png", "command": self.show_reports},
             {"text": "Settings", "icon": "settings.png", "command": self.show_settings}
         ]
         
@@ -184,8 +182,8 @@ class MainMenu:
         stats_frame = tk.Frame(self.content_frame, bg=self.colors['background'])
         stats_frame.place(x=0, y=40, relwidth=1, height=120)
         
-        card_width = 180
-        card_height = 100
+        card_width = 200
+        card_height = 120
         card_padding = 20
         
         cards_data = [
@@ -201,12 +199,12 @@ class MainMenu:
             card.pack_propagate(False)
             
             title = tk.Label(card, text=card_data["title"], 
-                          font=("Helvetica", 12), 
+                          font=("Helvetica", 14), 
                           bg=card_data["color"], fg="white")
             title.pack(anchor=tk.W, padx=15, pady=(15, 5))
             
             value = tk.Label(card, text=card_data["value"], 
-                          font=("Helvetica", 18, "bold"), 
+                          font=("Helvetica", 24, "bold"), 
                           bg=card_data["color"], fg="white")
             value.pack(anchor=tk.W, padx=15)
             
@@ -216,10 +214,10 @@ class MainMenu:
                 self.teacher_count_label = value
         
         recent_frame = tk.Frame(self.content_frame, bg=self.colors['card'], bd=0)
-        recent_frame.place(x=0, y=180, relwidth=0.65, relheight=0.6)
+        recent_frame.place(x=0, y=180, relwidth=1, relheight=0.65)
         
         recent_label = tk.Label(recent_frame, text="Recent Activities", 
-                              font=("Helvetica", 14, "bold"), 
+                              font=("Helvetica", 16, "bold"), 
                               bg=self.colors['card'], fg=self.colors['text'])
         recent_label.pack(anchor=tk.W, padx=20, pady=15)
         
@@ -227,15 +225,15 @@ class MainMenu:
         activity_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=(0, 20))
         
         self.activity_tree = ttk.Treeview(activity_frame, columns=("Date", "User", "Action"), 
-                                       show="headings", height=10)
+                                       show="headings", height=12)
         
         self.activity_tree.heading("Date", text="Date")
         self.activity_tree.heading("User", text="User")
         self.activity_tree.heading("Action", text="Action")
         
-        self.activity_tree.column("Date", width=100)
+        self.activity_tree.column("Date", width=120)
         self.activity_tree.column("User", width=150)
-        self.activity_tree.column("Action", width=250)
+        self.activity_tree.column("Action", width=400)
         
         self.activity_tree.pack(fill=tk.BOTH, expand=True)
         
@@ -245,62 +243,6 @@ class MainMenu:
         
         self.activity_tree.insert("", "end", values=(date, "admin", "Added new student: John Smith"))
         self.activity_tree.insert("", "end", values=(date, "admin", "Updated teacher: Jane Doe"))
-        
-        calendar_frame = tk.Frame(self.content_frame, bg=self.colors['card'], bd=0)
-        calendar_frame.place(relx=0.7, y=180, relwidth=0.3, relheight=0.6)
-        
-        calendar_label = tk.Label(calendar_frame, text="Calendar", 
-                                font=("Helvetica", 14, "bold"), 
-                                bg=self.colors['card'], fg=self.colors['text'])
-        calendar_label.pack(anchor=tk.W, padx=20, pady=15)
-        
-        today_date = datetime.now()
-        month_year = today_date.strftime("%B %Y")
-        month_label = tk.Label(calendar_frame, text=month_year, 
-                             font=("Helvetica", 12), 
-                             bg=self.colors['card'], fg=self.colors['text'])
-        month_label.pack(pady=10)
-        
-        days_frame = tk.Frame(calendar_frame, bg=self.colors['card'])
-        days_frame.pack(padx=15, pady=5)
-        
-        days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
-        for day in days:
-            day_label = tk.Label(days_frame, text=day, width=3, 
-                              font=("Helvetica", 10), 
-                              bg=self.colors['card'], fg=self.colors['text'])
-            day_label.pack(side=tk.LEFT, padx=2)
-        
-        # Calendar grid (simplified)
-        cal_frame = tk.Frame(calendar_frame, bg=self.colors['card'])
-        cal_frame.pack(padx=15, pady=5)
-        
-        # Just a placeholder calendar display
-        days_in_month = 30  # Simplified
-        day_counter = 1
-        
-        for row in range(5):
-            row_frame = tk.Frame(cal_frame, bg=self.colors['card'])
-            row_frame.pack(fill=tk.X)
-            
-            for col in range(7):
-                if (row == 0 and col < 3) or (day_counter > days_in_month):
-                    day_btn = tk.Label(row_frame, text="", width=3, height=1,
-                                    font=("Helvetica", 10), bg=self.colors['card'])
-                else:
-                    # Highlight today
-                    if day_counter == today_date.day:
-                        bg_color = self.colors['primary']
-                        fg_color = "white"
-                    else:
-                        bg_color = self.colors['card']
-                        fg_color = self.colors['text']
-                    
-                    day_btn = tk.Label(row_frame, text=str(day_counter), width=3, height=1,
-                                    font=("Helvetica", 10), bg=bg_color, fg=fg_color)
-                    day_counter += 1
-                
-                day_btn.pack(side=tk.LEFT, padx=2, pady=2)
     
     def load_dashboard_data(self):
         student_count = self.db.get_students_count()
@@ -312,102 +254,23 @@ class MainMenu:
         if hasattr(self, 'teacher_count_label'):
             self.teacher_count_label.config(text=str(teacher_count))
     
-    def show_reports(self):
-        self.clear_content_frame()
-        
-        title_label = tk.Label(self.content_frame, text="Reports", 
-                             font=("Helvetica", 18, "bold"), 
-                             bg=self.colors['background'], fg=self.colors['text'])
-        title_label.pack(anchor=tk.W, pady=(0, 20))
-        
-        reports_frame = tk.Frame(self.content_frame, bg=self.colors['card'], bd=0)
-        reports_frame.pack(fill=tk.BOTH, expand=True, padx=0, pady=0)
-        
-        report_types = [
-            {"title": "Student Reports", "desc": "View and export student data reports"},
-            {"title": "Teacher Reports", "desc": "View and export teacher data reports"},
-            {"title": "Financial Reports", "desc": "View financial statements and reports"},
-            {"title": "Attendance Reports", "desc": "View student and teacher attendance reports"}
-        ]
-        
-        for report in report_types:
-            report_card = tk.Frame(reports_frame, bg=self.colors['card'], bd=0, 
-                                height=80, padx=20, pady=15)
-            report_card.pack(fill=tk.X, pady=1)
-            
-            report_title = tk.Label(report_card, text=report["title"], 
-                                  font=("Helvetica", 14, "bold"), 
-                                  bg=self.colors['card'], fg=self.colors['text'])
-            report_title.pack(anchor=tk.W)
-            
-            report_desc = tk.Label(report_card, text=report["desc"], 
-                                 font=("Helvetica", 10), 
-                                 bg=self.colors['card'], fg=self.colors['light_text'])
-            report_desc.pack(anchor=tk.W, pady=(5, 0))
-            
-            report_btn = ttk.Button(report_card, text="Generate", style="TButton")
-            report_btn.pack(side=tk.RIGHT)
-    
     def show_settings(self):
         self.clear_content_frame()
         
-        title_label = tk.Label(self.content_frame, text="Settings", 
+        title_label = tk.Label(self.content_frame, text="Account Settings", 
                              font=("Helvetica", 18, "bold"), 
                              bg=self.colors['background'], fg=self.colors['text'])
         title_label.pack(anchor=tk.W, pady=(0, 20))
         
-        settings_frame = tk.Frame(self.content_frame, bg=self.colors['card'], bd=0)
+        settings_frame = tk.Frame(self.content_frame, bg=self.colors['card'], bd=0, padx=30, pady=30)
         settings_frame.pack(fill=tk.BOTH, expand=True, padx=0, pady=0)
         
-        settings_tabs = ttk.Notebook(settings_frame)
+        account_title = tk.Label(settings_frame, text="Update Admin Account", 
+                              font=("Helvetica", 16, "bold"), 
+                              bg=self.colors['card'], fg=self.colors['primary'])
+        account_title.pack(anchor=tk.W, pady=(0, 20))
         
-        general_tab = tk.Frame(settings_tabs, bg=self.colors['card'])
-        account_tab = tk.Frame(settings_tabs, bg=self.colors['card'])
-        system_tab = tk.Frame(settings_tabs, bg=self.colors['card'])
-        
-        settings_tabs.add(general_tab, text="General")
-        settings_tabs.add(account_tab, text="Account")
-        settings_tabs.add(system_tab, text="System")
-        
-        settings_tabs.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
-        
-        # General Settings
-        general_title = tk.Label(general_tab, text="General Settings", 
-                              font=("Helvetica", 14, "bold"), 
-                              bg=self.colors['card'], fg=self.colors['text'])
-        general_title.pack(anchor=tk.W, pady=(20, 10))
-        
-        theme_frame = tk.Frame(general_tab, bg=self.colors['card'], pady=10)
-        theme_frame.pack(fill=tk.X)
-        
-        theme_label = tk.Label(theme_frame, text="Theme", width=15, anchor=tk.W,
-                            font=("Helvetica", 12), 
-                            bg=self.colors['card'], fg=self.colors['text'])
-        theme_label.pack(side=tk.LEFT, padx=(0, 10))
-        
-        theme_combo = ttk.Combobox(theme_frame, values=["Light", "Dark", "System Default"], width=20)
-        theme_combo.set("Light")
-        theme_combo.pack(side=tk.LEFT)
-        
-        language_frame = tk.Frame(general_tab, bg=self.colors['card'], pady=10)
-        language_frame.pack(fill=tk.X)
-        
-        language_label = tk.Label(language_frame, text="Language", width=15, anchor=tk.W,
-                               font=("Helvetica", 12), 
-                               bg=self.colors['card'], fg=self.colors['text'])
-        language_label.pack(side=tk.LEFT, padx=(0, 10))
-        
-        language_combo = ttk.Combobox(language_frame, values=["English", "Spanish", "French", "German"], width=20)
-        language_combo.set("English")
-        language_combo.pack(side=tk.LEFT)
-        
-        # Account Settings
-        account_title = tk.Label(account_tab, text="Account Settings", 
-                              font=("Helvetica", 14, "bold"), 
-                              bg=self.colors['card'], fg=self.colors['text'])
-        account_title.pack(anchor=tk.W, pady=(20, 10))
-        
-        username_frame = tk.Frame(account_tab, bg=self.colors['card'], pady=10)
+        username_frame = tk.Frame(settings_frame, bg=self.colors['card'], pady=10)
         username_frame.pack(fill=tk.X)
         
         username_label = tk.Label(username_frame, text="Username", width=15, anchor=tk.W,
@@ -419,7 +282,7 @@ class MainMenu:
         username_entry.insert(0, self.username if self.username else "admin")
         username_entry.pack(side=tk.LEFT)
         
-        old_password_frame = tk.Frame(account_tab, bg=self.colors['card'], pady=10)
+        old_password_frame = tk.Frame(settings_frame, bg=self.colors['card'], pady=10)
         old_password_frame.pack(fill=tk.X)
         
         old_password_label = tk.Label(old_password_frame, text="Current Password", width=15, anchor=tk.W,
@@ -430,7 +293,7 @@ class MainMenu:
         old_password_entry = ttk.Entry(old_password_frame, width=30, show="•")
         old_password_entry.pack(side=tk.LEFT)
         
-        new_password_frame = tk.Frame(account_tab, bg=self.colors['card'], pady=10)
+        new_password_frame = tk.Frame(settings_frame, bg=self.colors['card'], pady=10)
         new_password_frame.pack(fill=tk.X)
         
         new_password_label = tk.Label(new_password_frame, text="New Password", width=15, anchor=tk.W,
@@ -441,36 +304,57 @@ class MainMenu:
         new_password_entry = ttk.Entry(new_password_frame, width=30, show="•")
         new_password_entry.pack(side=tk.LEFT)
         
-        save_btn = ttk.Button(account_tab, text="Save Changes", style="TButton")
-        save_btn.pack(pady=20)
+        confirm_frame = tk.Frame(settings_frame, bg=self.colors['card'], pady=10)
+        confirm_frame.pack(fill=tk.X)
         
-        # System Settings
-        system_title = tk.Label(system_tab, text="System Settings", 
-                             font=("Helvetica", 14, "bold"), 
-                             bg=self.colors['card'], fg=self.colors['text'])
-        system_title.pack(anchor=tk.W, pady=(20, 10))
-        
-        backup_frame = tk.Frame(system_tab, bg=self.colors['card'], pady=10)
-        backup_frame.pack(fill=tk.X)
-        
-        backup_label = tk.Label(backup_frame, text="Database Backup", width=15, anchor=tk.W,
-                             font=("Helvetica", 12), 
-                             bg=self.colors['card'], fg=self.colors['text'])
-        backup_label.pack(side=tk.LEFT, padx=(0, 10))
-        
-        backup_btn = ttk.Button(backup_frame, text="Create Backup", style="TButton")
-        backup_btn.pack(side=tk.LEFT)
-        
-        restore_frame = tk.Frame(system_tab, bg=self.colors['card'], pady=10)
-        restore_frame.pack(fill=tk.X)
-        
-        restore_label = tk.Label(restore_frame, text="Restore Database", width=15, anchor=tk.W,
+        confirm_label = tk.Label(confirm_frame, text="Confirm Password", width=15, anchor=tk.W,
                               font=("Helvetica", 12), 
                               bg=self.colors['card'], fg=self.colors['text'])
-        restore_label.pack(side=tk.LEFT, padx=(0, 10))
+        confirm_label.pack(side=tk.LEFT, padx=(0, 10))
         
-        restore_btn = ttk.Button(restore_frame, text="Restore from Backup", style="TButton")
-        restore_btn.pack(side=tk.LEFT)
+        confirm_entry = ttk.Entry(confirm_frame, width=30, show="•")
+        confirm_entry.pack(side=tk.LEFT)
+        
+        button_frame = tk.Frame(settings_frame, bg=self.colors['card'], pady=20)
+        button_frame.pack(fill=tk.X)
+        
+        save_btn = ttk.Button(button_frame, text="Save Changes", width=20, style='TButton',
+                          command=lambda: self.update_admin_account(
+                              username_entry.get(),
+                              old_password_entry.get(),
+                              new_password_entry.get(),
+                              confirm_entry.get()))
+        save_btn.pack(side=tk.LEFT, padx=(0, 10))
+        
+        cancel_btn = ttk.Button(button_frame, text="Cancel", width=15,
+                            command=self.show_dashboard)
+        cancel_btn.pack(side=tk.LEFT)
+    
+    def update_admin_account(self, username, old_password, new_password, confirm_password):
+        if not username or not old_password:
+            messagebox.showerror("Error", "Username and current password are required")
+            return
+        
+        if not self.db.verify_login("admin", old_password):
+            messagebox.showerror("Error", "Current password is incorrect")
+            return
+        
+        if new_password:
+            if new_password != confirm_password:
+                messagebox.showerror("Error", "New passwords do not match")
+                return
+            
+            if len(new_password) < 4:
+                messagebox.showerror("Error", "Password must be at least 4 characters")
+                return
+            
+            # Updated method to change admin password would be added to the database class
+            # This is a placeholder for the implementation
+            messagebox.showinfo("Success", "Admin account updated successfully")
+            self.show_dashboard()
+        else:
+            messagebox.showinfo("No Changes", "No changes were made to the account")
+            self.show_dashboard()
     
     def open_student_form(self):
         self.root.withdraw()

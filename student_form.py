@@ -25,7 +25,7 @@ class StudentForm:
         self.root.configure(bg=self.colors['background'])
         
         window_width = 850
-        window_height = 700
+        window_height = 710 
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         x = (screen_width - window_width) // 2
@@ -63,12 +63,12 @@ class StudentForm:
                     foreground=[('active', 'white'), 
                                 ('pressed', 'white')])
         
-        header_frame = tk.Frame(self.root, bg=self.colors['primary'], height=70)
+        header_frame = tk.Frame(self.root, bg=self.colors['primary'], height=80)  
         header_frame.pack(fill=tk.X)
         header_frame.pack_propagate(False)
         
         header_label = tk.Label(header_frame, text="Student Management", 
-                             font=("Helvetica", 18, "bold"), 
+                             font=("Helvetica", 20, "bold"),  
                              bg=self.colors['primary'], fg="white")
         header_label.pack(side=tk.LEFT, padx=30, pady=15)
         
@@ -89,7 +89,7 @@ class StudentForm:
         search_frame.pack(side=tk.LEFT, padx=(0, 10), fill=tk.Y)
         
         self.search_entry = ttk.Entry(search_frame, width=25, font=("Helvetica", 12), style='TEntry')
-        self.search_entry.pack(side=tk.LEFT, padx=(15, 0), pady=10, ipady=5)
+        self.search_entry.pack(side=tk.LEFT, padx=(15, 0), pady=10, ipady=7)
         
         search_btn = ttk.Button(search_frame, text="🔍 Search", style='TButton',
                            command=self.search_student)
@@ -122,12 +122,10 @@ class StudentForm:
         right_frame = tk.Frame(main_frame, bg=self.colors['background'], width=400)
         right_frame.pack(side=tk.RIGHT, fill=tk.BOTH)
         
-        # Basic Details Frame
         basic_frame = tk.LabelFrame(left_frame, text="Basic Details", font=("Helvetica", 12, "bold"), 
                                   padx=15, pady=15, bg=self.colors['card'], fg=self.colors['primary'])
         basic_frame.pack(fill=tk.BOTH, pady=(0, 10))
         
-        # First Name
         first_name_label = tk.Label(basic_frame, text="First Name", bg=self.colors['card'], 
                                  font=("Helvetica", 11), fg=self.colors['text'])
         first_name_label.grid(row=0, column=0, padx=10, pady=8, sticky=tk.W)
@@ -135,7 +133,6 @@ class StudentForm:
         self.first_name_entry = ttk.Entry(basic_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.first_name_entry.grid(row=0, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Last Name
         last_name_label = tk.Label(basic_frame, text="Last Name", bg=self.colors['card'], 
                                 font=("Helvetica", 11), fg=self.colors['text'])
         last_name_label.grid(row=1, column=0, padx=10, pady=8, sticky=tk.W)
@@ -143,7 +140,6 @@ class StudentForm:
         self.last_name_entry = ttk.Entry(basic_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.last_name_entry.grid(row=1, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Date of Birth
         dob_label = tk.Label(basic_frame, text="Date of Birth", bg=self.colors['card'], 
                           font=("Helvetica", 11), fg=self.colors['text'])
         dob_label.grid(row=2, column=0, padx=10, pady=8, sticky=tk.W)
@@ -153,7 +149,6 @@ class StudentForm:
                                 date_pattern='yyyy-mm-dd')
         self.dob_entry.grid(row=2, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Gender
         gender_label = tk.Label(basic_frame, text="Gender", bg=self.colors['card'], 
                              font=("Helvetica", 11), fg=self.colors['text'])
         gender_label.grid(row=3, column=0, padx=10, pady=8, sticky=tk.W)
@@ -173,12 +168,10 @@ class StudentForm:
                                    activebackground=self.colors['card'])
         female_radio.pack(side=tk.LEFT)
         
-        # Contact Details Frame
         contact_frame = tk.LabelFrame(left_frame, text="Contact Details", font=("Helvetica", 12, "bold"), 
                                     padx=15, pady=15, bg=self.colors['card'], fg=self.colors['secondary'])
         contact_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Address
         address_label = tk.Label(contact_frame, text="Address", bg=self.colors['card'], 
                               font=("Helvetica", 11), fg=self.colors['text'])
         address_label.grid(row=0, column=0, padx=10, pady=8, sticky=tk.NW)
@@ -187,7 +180,6 @@ class StudentForm:
                                  bd=1, relief=tk.SOLID)
         self.address_text.grid(row=0, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Email
         email_label = tk.Label(contact_frame, text="Email", bg=self.colors['card'], 
                             font=("Helvetica", 11), fg=self.colors['text'])
         email_label.grid(row=1, column=0, padx=10, pady=8, sticky=tk.W)
@@ -195,7 +187,6 @@ class StudentForm:
         self.email_entry = ttk.Entry(contact_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.email_entry.grid(row=1, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Mobile Phone
         mobile_label = tk.Label(contact_frame, text="Mobile Phone", bg=self.colors['card'], 
                              font=("Helvetica", 11), fg=self.colors['text'])
         mobile_label.grid(row=2, column=0, padx=10, pady=8, sticky=tk.W)
@@ -203,7 +194,6 @@ class StudentForm:
         self.mobile_entry = ttk.Entry(contact_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.mobile_entry.grid(row=2, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Home Phone
         home_label = tk.Label(contact_frame, text="Home Phone", bg=self.colors['card'], 
                            font=("Helvetica", 11), fg=self.colors['text'])
         home_label.grid(row=3, column=0, padx=10, pady=8, sticky=tk.W)
@@ -211,12 +201,10 @@ class StudentForm:
         self.home_entry = ttk.Entry(contact_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.home_entry.grid(row=3, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Parent Details Frame
         parent_frame = tk.LabelFrame(right_frame, text="Parent/Guardian Details", font=("Helvetica", 12, "bold"), 
                                    padx=15, pady=15, bg=self.colors['card'], fg=self.colors['accent'])
         parent_frame.pack(fill=tk.BOTH, pady=(0, 10))
         
-        # Parent Name
         parent_name_label = tk.Label(parent_frame, text="Parent Name", bg=self.colors['card'], 
                                   font=("Helvetica", 11), fg=self.colors['text'])
         parent_name_label.grid(row=0, column=0, padx=10, pady=8, sticky=tk.W)
@@ -224,7 +212,6 @@ class StudentForm:
         self.parent_name_entry = ttk.Entry(parent_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.parent_name_entry.grid(row=0, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # NIC
         nic_label = tk.Label(parent_frame, text="NIC", bg=self.colors['card'], 
                           font=("Helvetica", 11), fg=self.colors['text'])
         nic_label.grid(row=1, column=0, padx=10, pady=8, sticky=tk.W)
@@ -232,7 +219,6 @@ class StudentForm:
         self.nic_entry = ttk.Entry(parent_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.nic_entry.grid(row=1, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Contact No
         contact_label = tk.Label(parent_frame, text="Contact No", bg=self.colors['card'], 
                               font=("Helvetica", 11), fg=self.colors['text'])
         contact_label.grid(row=2, column=0, padx=10, pady=8, sticky=tk.W)
@@ -240,35 +226,32 @@ class StudentForm:
         self.contact_entry = ttk.Entry(parent_frame, width=25, font=("Helvetica", 11), style='TEntry')
         self.contact_entry.grid(row=2, column=1, padx=10, pady=8, sticky=tk.W)
         
-        # Additional Info Frame
         additional_frame = tk.LabelFrame(right_frame, text="Additional Information", font=("Helvetica", 12, "bold"), 
                                       padx=15, pady=15, bg=self.colors['card'], fg=self.colors['primary'])
         additional_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Preview area for student data
         preview_label = tk.Label(additional_frame, text="Student Preview", bg=self.colors['card'], 
                               font=("Helvetica", 11, "bold"), fg=self.colors['text'])
         preview_label.pack(anchor=tk.W, padx=10, pady=(0, 5))
         
-        self.preview_text = tk.Text(additional_frame, width=40, height=8, font=("Helvetica", 10),
+        self.preview_text = tk.Text(additional_frame, width=40, height=9, font=("Helvetica", 10),
                                  bd=1, relief=tk.SOLID, state=tk.DISABLED)
         self.preview_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        # Button Frame
         button_frame = tk.Frame(self.root, bg=self.colors['background'], height=70)
         button_frame.pack(fill=tk.X, padx=20, pady=20)
         
-        register_button = ttk.Button(button_frame, text="Register", width=12, 
+        register_button = ttk.Button(button_frame, text="Register", width=15, 
                                 command=self.register_student, style='TButton')
-        register_button.pack(side=tk.LEFT, padx=5)
+        register_button.pack(side=tk.LEFT, padx=5, pady=5)
         
-        update_button = ttk.Button(button_frame, text="Update", width=12, 
+        update_button = ttk.Button(button_frame, text="Update", width=15, 
                               command=self.update_student, style='TButton')
-        update_button.pack(side=tk.LEFT, padx=5)
+        update_button.pack(side=tk.LEFT, padx=5, pady=5)
         
-        clear_button = ttk.Button(button_frame, text="Clear", width=12, 
+        clear_button = ttk.Button(button_frame, text="Clear", width=15, 
                              command=self.clear_fields)
-        clear_button.pack(side=tk.LEFT, padx=5)
+        clear_button.pack(side=tk.LEFT, padx=5, pady=5)
         
         self.style.configure('Danger.TButton', 
                           background=self.colors['danger'], 
@@ -280,28 +263,24 @@ class StudentForm:
                     foreground=[('active', 'white'), 
                                 ('pressed', 'white')])
         
-        delete_button = ttk.Button(button_frame, text="Delete", width=12, 
+        delete_button = ttk.Button(button_frame, text="Delete", width=15, 
                               command=self.delete_student, style='Danger.TButton')
-        delete_button.pack(side=tk.LEFT, padx=5)
+        delete_button.pack(side=tk.LEFT, padx=5, pady=5)
         
         back_button = ttk.Button(button_frame, text="Back to Home", width=15, 
                             command=self.exit_form)
-        back_button.pack(side=tk.RIGHT, padx=5)
+        back_button.pack(side=tk.RIGHT, padx=5, pady=5)
         
-        # Bind events
         self.root.protocol("WM_DELETE_WINDOW", self.exit_form)
         
-        # Bind the search entry to the Enter key
         self.search_entry.bind("<Return>", lambda e: self.search_student())
         
-        # Bind entry field changes to update preview
         self.first_name_entry.bind("<KeyRelease>", lambda e: self.update_preview())
         self.last_name_entry.bind("<KeyRelease>", lambda e: self.update_preview())
         self.dob_entry.bind("<<DateEntrySelected>>", lambda e: self.update_preview())
         self.email_entry.bind("<KeyRelease>", lambda e: self.update_preview())
         self.mobile_entry.bind("<KeyRelease>", lambda e: self.update_preview())
         
-        # Bind combo selection event
         self.reg_combo.bind("<<ComboboxSelected>>", self.load_student_data)
     
     def load_reg_numbers(self):
@@ -486,7 +465,6 @@ class StudentForm:
             messagebox.showerror("Validation Error", "Phone numbers must be numeric values.")
             return False
         
-        # Calculate age from date of birth
         dob = datetime.strptime(data['dateOfBirth'], '%Y-%m-%d')
         today = datetime.now()
         age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
@@ -533,6 +511,10 @@ class StudentForm:
         if self.nic_entry.get():
             preview += f"NIC: {self.nic_entry.get()}\n"
         
+        parent_name = self.parent_name_entry.get()
+        if parent_name:
+            preview += f"Parent: {parent_name}\n"
+        
         self.preview_text.insert(tk.END, preview)
         self.preview_text.config(state=tk.DISABLED)
     
@@ -556,24 +538,41 @@ class StudentForm:
         search_window.configure(bg=self.colors['background'])
         search_window.grab_set()
         
-        window_width = 450
-        window_height = 350
+        window_width = 500
+        window_height = 400
         screen_width = search_window.winfo_screenwidth()
         screen_height = search_window.winfo_screenheight()
         x = (screen_width - window_width) // 2
         y = (screen_height - window_height) // 2
         search_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
         
-        label = tk.Label(search_window, text="Search Results", 
-                      font=("Helvetica", 14, "bold"), 
-                      bg=self.colors['background'], fg=self.colors['text'])
-        label.pack(pady=(15, 10))
+        header_frame = tk.Frame(search_window, bg=self.colors['primary'], height=60)
+        header_frame.pack(fill=tk.X)
+        
+        label = tk.Label(header_frame, text="Search Results", 
+                      font=("Helvetica", 16, "bold"), 
+                      bg=self.colors['primary'], fg="white")
+        label.place(relx=0.5, rely=0.5, anchor="center")
         
         result_frame = tk.Frame(search_window, bg=self.colors['card'], bd=0)
-        result_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=(0, 20))
+        result_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=(15, 20))
         
         columns = ("Reg No", "First Name", "Last Name")
         tree = ttk.Treeview(result_frame, columns=columns, show="headings", height=10)
+        
+        self.style.configure("Treeview", 
+                          background=self.colors['card'],
+                          foreground=self.colors['text'],
+                          rowheight=30,
+                          fieldbackground=self.colors['card'])
+        
+        self.style.configure("Treeview.Heading",
+                          background=self.colors['primary'],
+                          foreground="white",
+                          relief="flat")
+        
+        self.style.map("Treeview.Heading",
+                    background=[('active', self.colors['primary_dark'])])
         
         tree.heading("Reg No", text="Reg No")
         tree.heading("First Name", text="First Name")
@@ -586,7 +585,11 @@ class StudentForm:
         for row in results:
             tree.insert("", "end", values=row)
         
-        tree.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
+        scrollbar = ttk.Scrollbar(result_frame, orient="vertical", command=tree.yview)
+        tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        tree.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         def select_item():
             selected = tree.selection()
